@@ -1,0 +1,52 @@
+name: Multi-Platform Testing
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ubuntu-job:
+    name: Run on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS Info
+        run: uname -a
+
+      - name: Create file on Ubuntu
+        run: |
+          echo "This file is created on Ubuntu" > ubuntu.txt
+          cat ubuntu.txt
+
+  windows-job:
+    name: Run on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS Info
+        run: systeminfo | findstr /B /C:"OS"
+
+      - name: Create file on Windows
+        run: |
+          echo This file is created on Windows > windows.txt
+          type windows.txt
+
+  macos-job:
+    name: Run on macOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS Info
+        run: uname -a
+
+      - name: Create file on Mac
+        run: |
+          echo "This file is created on macOS" > mac.txt
+          cat mac.txt
